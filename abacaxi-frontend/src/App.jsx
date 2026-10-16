@@ -20,7 +20,7 @@ export default function App() {
   return (
     <>
       <header>
-        <h1>🍍 Fazenda de Abacaxis</h1>
+        <h1> <span class="abacaxi-large">🍍</span> Fazenda de Abacaxis</h1>
         <nav>
           {Object.entries(PAGINAS).map(([chave, nome]) => (
             <button

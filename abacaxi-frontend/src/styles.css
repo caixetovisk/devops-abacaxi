@@ -13,16 +13,18 @@ header {
   align-items: center;
   gap: 16px;
   padding: 12px 24px;
-  background: #2e7d32;
+  background: #387403;
   color: #fff;
 }
 header h1 { font-size: 1.3rem; margin: 0; }
 header nav { display: flex; gap: 8px; flex: 1; }
 header nav button { background: transparent; border: 1px solid #fff; }
 header nav button.ativo { background: #f9c80e; color: #333; border-color: #f9c80e; }
-.usuario button { background: #1b5e20; margin-left: 8px; }
+.usuario button { background: #0a5d10; margin-left: 8px; }
 
 main { max-width: 960px; margin: 24px auto; padding: 0 16px; }
+
+.abacaxi-large{font-size: xx-large;}
 
 .card {
   background: #fff;
@@ -33,7 +35,7 @@ main { max-width: 960px; margin: 24px auto; padding: 0 16px; }
 }
 
 button {
-  background: #2e7d32;
+  background: #99920d;
   color: #fff;
   border: none;
   border-radius: 6px;
