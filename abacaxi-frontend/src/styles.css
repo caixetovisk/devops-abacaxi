@@ -24,6 +24,10 @@ header nav button.ativo { background: #f9c80e; color: #333; border-color: #f9c80
 
 main { max-width: 960px; margin: 24px auto; padding: 0 16px; }
 
+.abacaxi-large{
+  font-size: xx-large;
+}
+
 .card {
   background: #fff;
   border-radius: 8px;
