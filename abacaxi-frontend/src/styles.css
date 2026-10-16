@@ -13,7 +13,7 @@ header {
   align-items: center;
   gap: 16px;
   padding: 12px 24px;
-  background: #2e7d32;
+  background: #e95fee;
   color: #fff;
 }
 header h1 { font-size: 1.3rem; margin: 0; }
@@ -23,6 +23,10 @@ header nav button.ativo { background: #f9c80e; color: #333; border-color: #f9c80
 .usuario button { background: #1b5e20; margin-left: 8px; }
 
 main { max-width: 960px; margin: 24px auto; padding: 0 16px; }
+
+.abacaxi-large{
+  font-size: xx-large;
+}
 
 .card {
   background: #fff;
