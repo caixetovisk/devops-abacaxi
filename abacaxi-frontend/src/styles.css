@@ -3,8 +3,8 @@
 body {
   margin: 0;
   font-family: system-ui, sans-serif;
-  background: #fdf8e6;
-  color: #333;
+  background: #faeeb5;
+  color: #000000;
 }
 
 header {
@@ -13,8 +13,8 @@ header {
   align-items: center;
   gap: 16px;
   padding: 12px 24px;
-  background: #2e7d32;
-  color: #fff;
+  background: #ff0101;
+  color: #fa0909;
 }
 header h1 { font-size: 1.3rem; margin: 0; }
 header nav { display: flex; gap: 8px; flex: 1; }
