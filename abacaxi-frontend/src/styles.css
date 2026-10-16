@@ -13,14 +13,14 @@ header {
   align-items: center;
   gap: 16px;
   padding: 12px 24px;
-  background: #2e7d32;
+  background: #08550b;
   color: #fff;
 }
 header h1 { font-size: 1.3rem; margin: 0; }
 header nav { display: flex; gap: 8px; flex: 1; }
 header nav button { background: transparent; border: 1px solid #fff; }
 header nav button.ativo { background: #f9c80e; color: #333; border-color: #f9c80e; }
-.usuario button { background: #1b5e20; margin-left: 8px; }
+.usuario button { background: #186d1e; margin-left: 8px; }
 
 main { max-width: 960px; margin: 24px auto; padding: 0 16px; }
 
@@ -33,7 +33,7 @@ main { max-width: 960px; margin: 24px auto; padding: 0 16px; }
 }
 
 button {
-  background: #2e7d32;
+  background: #17701b;
   color: #fff;
   border: none;
   border-radius: 6px;
@@ -54,7 +54,7 @@ input {
 
 .login { display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 16px; }
 .login form { width: 100%; max-width: 340px; display: flex; flex-direction: column; gap: 12px; }
-.login h1 { text-align: center; font-size: 1.4rem; color: #2e7d32; }
+.login h1 { text-align: center; font-size: 1.4rem; color: #228b27; }
 
 .formulario { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; }
 .formulario h2 { width: 100%; margin: 0; font-size: 1.1rem; }
@@ -66,7 +66,7 @@ th, td { text-align: left; padding: 8px; border-bottom: 1px solid #eee; }
 
 .indicadores { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
 .indicadores span { display: block; color: #666; font-size: 0.9rem; }
-.indicadores strong { font-size: 1.8rem; color: #2e7d32; }
+.indicadores strong { font-size: 1.8rem; color: #0d8313; }
 
 .erro { color: #c62828; }
 .dica { color: #666; font-size: 0.85rem; text-align: center; }
