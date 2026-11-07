@@ -1,0 +1,426 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "API da Fazenda de Abacaxis",
+    "version": "1.0.0",
+    "description": "API para autenticação, registro de colheitas e vendas, controle de estoque e consulta do resumo."
+  },
+  "servers": [
+    {
+      "url": "/",
+      "description": "Servidor atual da API"
+    },
+    {
+      "url": "http://localhost:3001",
+      "description": "Ambiente local"
+    }
+  ],
+  "tags": [
+    { "name": "Saúde", "description": "Verificação de disponibilidade da API" },
+    { "name": "Autenticação", "description": "Login e emissão de token JWT" },
+    { "name": "Colheitas", "description": "Registro de colheitas" },
+    { "name": "Vendas", "description": "Registro de vendas" },
+    { "name": "Resumo", "description": "Indicadores de estoque e faturamento" }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "tags": ["Saúde"],
+        "summary": "Verificar se a API está disponível",
+        "responses": {
+          "200": {
+            "description": "API ativa",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Status" },
+                "example": {
+                  "status": "ok",
+                  "mensagem": "API da Fazenda de Abacaxis 🍍"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": ["Autenticação"],
+        "summary": "Entrar e obter token JWT",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/LoginRequest" },
+              "example": { "usuario": "admin", "senha": "admin123" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Autenticação realizada. O token expira em 8 horas.",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/LoginResponse" }
+              }
+            }
+          },
+          "401": {
+            "description": "Usuário ou senha inválidos",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "example": { "erro": "Usuário ou senha inválidos" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/colheitas": {
+      "get": {
+        "tags": ["Colheitas"],
+        "summary": "Listar colheitas",
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "Colheitas ordenadas por data e ID decrescentes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Colheita" }
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" }
+        }
+      },
+      "post": {
+        "tags": ["Colheitas"],
+        "summary": "Registrar colheita",
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/NovaColheita" },
+              "example": {
+                "data": "2026-11-06",
+                "quantidade": 100,
+                "observacao": "Lote da manhã"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Colheita registrada",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Colheita" }
+              }
+            }
+          },
+          "400": {
+            "description": "Data ausente ou quantidade menor que 1",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "example": {
+                  "erro": "Informe a data e uma quantidade maior que zero"
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" }
+        }
+      }
+    },
+    "/colheitas/{id}": {
+      "delete": {
+        "tags": ["Colheitas"],
+        "summary": "Excluir colheita",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID da colheita",
+            "schema": { "type": "integer", "minimum": 1 }
+          }
+        ],
+        "responses": {
+          "204": { "description": "Colheita excluída" },
+          "400": {
+            "description": "A exclusão deixaria o estoque negativo",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "example": {
+                  "erro": "Não é possível excluir: os abacaxis desta colheita já foram vendidos"
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "404": {
+            "description": "Colheita não encontrada",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "example": { "erro": "Colheita não encontrada" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/vendas": {
+      "get": {
+        "tags": ["Vendas"],
+        "summary": "Listar vendas",
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "Vendas ordenadas por data e ID decrescentes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Venda" }
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" }
+        }
+      },
+      "post": {
+        "tags": ["Vendas"],
+        "summary": "Registrar venda",
+        "description": "A venda é rejeitada quando a quantidade solicitada é maior que o estoque disponível.",
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/NovaVenda" },
+              "example": {
+                "data": "2026-11-06",
+                "quantidade": 10,
+                "preco_unitario": 12.5,
+                "cliente": "Mercado Central"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Venda registrada",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Venda" }
+              }
+            }
+          },
+          "400": {
+            "description": "Dados inválidos ou estoque insuficiente",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "examples": {
+                  "dadosInvalidos": {
+                    "value": {
+                      "erro": "Informe data, quantidade e preço maiores que zero"
+                    }
+                  },
+                  "estoqueInsuficiente": {
+                    "value": { "erro": "Estoque insuficiente. Disponível: 5" }
+                  }
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" }
+        }
+      }
+    },
+    "/vendas/{id}": {
+      "delete": {
+        "tags": ["Vendas"],
+        "summary": "Excluir venda",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "ID da venda",
+            "schema": { "type": "integer", "minimum": 1 }
+          }
+        ],
+        "responses": {
+          "204": { "description": "Venda excluída" },
+          "401": { "$ref": "#/components/responses/Unauthorized" },
+          "404": {
+            "description": "Venda não encontrada",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Error" },
+                "example": { "erro": "Venda não encontrada" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/resumo": {
+      "get": {
+        "tags": ["Resumo"],
+        "summary": "Consultar estoque e faturamento",
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "Totais atuais da fazenda",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Resumo" },
+                "example": {
+                  "colhido": 100,
+                  "vendido": 40,
+                  "estoque": 60,
+                  "faturamento": 500
+                }
+              }
+            }
+          },
+          "401": { "$ref": "#/components/responses/Unauthorized" }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "Informe o token obtido em POST /auth/login."
+      }
+    },
+    "responses": {
+      "Unauthorized": {
+        "description": "Token ausente, inválido ou expirado",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/Error" },
+            "examples": {
+              "ausente": { "value": { "erro": "Token não informado" } },
+              "invalido": { "value": { "erro": "Token inválido ou expirado" } }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "Status": {
+        "type": "object",
+        "required": ["status", "mensagem"],
+        "properties": {
+          "status": { "type": "string", "example": "ok" },
+          "mensagem": {
+            "type": "string",
+            "example": "API da Fazenda de Abacaxis 🍍"
+          }
+        }
+      },
+      "LoginRequest": {
+        "type": "object",
+        "required": ["usuario", "senha"],
+        "properties": {
+          "usuario": { "type": "string", "example": "admin" },
+          "senha": { "type": "string", "format": "password", "example": "admin123" }
+        }
+      },
+      "LoginResponse": {
+        "type": "object",
+        "required": ["token", "usuario"],
+        "properties": {
+          "token": { "type": "string", "description": "JWT com validade de 8 horas" },
+          "usuario": { "type": "string", "example": "admin" }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "required": ["erro"],
+        "properties": {
+          "erro": { "type": "string", "example": "Mensagem de erro" }
+        }
+      },
+      "NovaColheita": {
+        "type": "object",
+        "required": ["data", "quantidade"],
+        "properties": {
+          "data": { "type": "string", "format": "date", "example": "2026-11-06" },
+          "quantidade": { "type": "integer", "minimum": 1, "example": 100 },
+          "observacao": { "type": "string", "nullable": true, "example": "Lote da manhã" }
+        }
+      },
+      "Colheita": {
+        "allOf": [
+          { "$ref": "#/components/schemas/NovaColheita" },
+          {
+            "type": "object",
+            "required": ["id", "createdAt", "updatedAt"],
+            "properties": {
+              "id": { "type": "integer", "example": 1 },
+              "createdAt": { "type": "string", "format": "date-time" },
+              "updatedAt": { "type": "string", "format": "date-time" }
+            }
+          }
+        ]
+      },
+      "NovaVenda": {
+        "type": "object",
+        "required": ["data", "quantidade", "preco_unitario"],
+        "properties": {
+          "data": { "type": "string", "format": "date", "example": "2026-11-06" },
+          "quantidade": { "type": "integer", "minimum": 1, "example": 10 },
+          "preco_unitario": {
+            "type": "number",
+            "minimum": 0,
+            "exclusiveMinimum": true,
+            "example": 12.5
+          },
+          "cliente": { "type": "string", "nullable": true, "example": "Mercado Central" }
+        }
+      },
+      "Venda": {
+        "type": "object",
+        "required": ["id", "data", "quantidade", "preco_unitario", "createdAt", "updatedAt"],
+        "properties": {
+          "id": { "type": "integer", "example": 1 },
+          "data": { "type": "string", "format": "date", "example": "2026-11-06" },
+          "quantidade": { "type": "integer", "example": 10 },
+          "preco_unitario": { "type": "string", "example": "12.50" },
+          "cliente": { "type": "string", "nullable": true, "example": "Mercado Central" },
+          "createdAt": { "type": "string", "format": "date-time" },
+          "updatedAt": { "type": "string", "format": "date-time" }
+        }
+      },
+      "Resumo": {
+        "type": "object",
+        "required": ["colhido", "vendido", "estoque", "faturamento"],
+        "properties": {
+          "colhido": { "type": "integer", "example": 100 },
+          "vendido": { "type": "integer", "example": 40 },
+          "estoque": { "type": "integer", "example": 60 },
+          "faturamento": { "type": "number", "example": 500 }
+        }
+      }
+    }
+  }
+}

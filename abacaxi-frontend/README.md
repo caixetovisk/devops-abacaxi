@@ -20,6 +20,10 @@ Pela variável de ambiente **`VITE_API_URL`**. Veja [src/api.js](src/api.js).
 
 > ⚠️ **Importante:** no Vite, as variáveis `VITE_*` são gravadas no código **no momento do build** (`npm run build`). Se você mudar o valor dela, precisa fazer **um novo build/deploy** para a mudança valer.
 
+## Idiomas
+
+A interface oferece português (padrão), inglês e chinês simplificado. Use as bandeiras no topo da página para trocar o idioma; a preferência fica salva no navegador e continua selecionada após sair da conta. Datas e valores são exibidos no formato local do idioma escolhido. Os preços permanecem em reais (BRL), sem conversão cambial.
+
 ## Estrutura
 
 ```

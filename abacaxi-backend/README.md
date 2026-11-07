@@ -37,6 +37,8 @@ src/
 
 ## Rotas
 
+A documentação interativa Swagger está disponível em **`/docs`** quando a API estiver rodando. A especificação OpenAPI em JSON está disponível em **`/openapi.json`**. Localmente, acesse http://localhost:3001/docs.
+
 | Método | Rota | Login? | Descrição |
 |---|---|---|---|
 | GET | `/` | não | Testa se a API está no ar |

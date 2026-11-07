@@ -49,6 +49,14 @@ A identidade atual é baseada em verde, amarelo, azul escuro e neutros suaves.
 - Ícones são simples e funcionam como elementos de destaque, sem depender de bibliotecas pesadas.
 - Use emojis ou símbolos curtos apenas quando reforçarem a identidade da marca ou a ação percebida.
 - Evite ícones muito elaborados ou excesso de ornamentação visual.
+- O seletor de idioma usa imagens SVG locais das bandeiras do Brasil, Estados Unidos e China no topo da página.
+- Destaque visualmente o idioma selecionado e forneça nome acessível para cada bandeira.
+
+## 4.1) Idiomas
+- O português é o idioma padrão; a interface também oferece inglês e chinês simplificado.
+- A preferência de idioma fica salva no `localStorage` e deve ser mantida ao sair da conta.
+- Textos novos da interface devem ser adicionados às traduções de todos os idiomas.
+- Valores monetários continuam em reais (BRL); o formato localiza números e datas, mas não realiza conversão cambial.
 
 ## 5) Botões
 A interface usa botões discretos, com bordas arredondadas e bom contraste.

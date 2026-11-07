@@ -3,6 +3,8 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
+const swaggerUi = require('swagger-ui-express');
+const openapi = require('./openapi.json');
 const { sequelize, Usuario } = require('./models');
 const auth = require('./middleware/auth');
 
@@ -10,6 +12,9 @@ const app = express();
 
 app.use(cors({ origin: process.env.FRONTEND_URL || '*' }));
 app.use(express.json());
+
+app.get('/openapi.json', (req, res) => res.json(openapi));
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(openapi));
 
 // Rota pública para testar se a API está no ar (usada também pelo Render)
 app.get('/', (req, res) => {

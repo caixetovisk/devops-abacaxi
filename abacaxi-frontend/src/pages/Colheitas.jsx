@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import { api, formatarData, hoje } from '../api.js';
+import { api, hoje } from '../api.js';
+import { formatarData, formatarNumero, traduzirErro } from '../i18n.js';
 
-export default function Colheitas() {
+export default function Colheitas({ idioma, t }) {
   const [colheitas, setColheitas] = useState([]);
   const [form, setForm] = useState({ data: hoje(), quantidade: '', observacao: '' });
   const [erro, setErro] = useState('');
@@ -37,38 +38,38 @@ export default function Colheitas() {
   return (
     <>
       <form className="card formulario" onSubmit={salvar}>
-        <h2>Registrar colheita</h2>
+        <h2>{t('harvests.title')}</h2>
         <label>
-          Data
+          {t('harvests.date')}
           <input type="date" value={form.data} onChange={(e) => setForm({ ...form, data: e.target.value })} required />
         </label>
         <label>
-          Quantidade
+          {t('harvests.quantity')}
           <input type="number" min="1" value={form.quantidade} onChange={(e) => setForm({ ...form, quantidade: e.target.value })} required />
         </label>
         <label>
-          Observação
+          {t('harvests.notes')}
           <input value={form.observacao} onChange={(e) => setForm({ ...form, observacao: e.target.value })} />
         </label>
-        <button type="submit">Salvar</button>
+        <button type="submit">{t('harvests.save')}</button>
       </form>
-      {erro && <p className="erro">{erro}</p>}
+      {erro && <p className="erro">{traduzirErro(erro, idioma)}</p>}
 
       <div className="card tabela">
         <table>
           <thead>
-            <tr><th>Data</th><th>Quantidade</th><th>Observação</th><th></th></tr>
+            <tr><th>{t('harvests.date')}</th><th>{t('harvests.quantity')}</th><th>{t('harvests.notes')}</th><th></th></tr>
           </thead>
           <tbody>
             {colheitas.map((c) => (
               <tr key={c.id}>
-                <td>{formatarData(c.data)}</td>
-                <td>{c.quantidade}</td>
+                <td>{formatarData(c.data, idioma)}</td>
+                <td>{formatarNumero(c.quantidade, idioma)}</td>
                 <td>{c.observacao}</td>
-                <td><button className="excluir" onClick={() => excluir(c.id)}>Excluir</button></td>
+                <td><button className="excluir" onClick={() => excluir(c.id)}>{t('harvests.delete')}</button></td>
               </tr>
             ))}
-            {colheitas.length === 0 && <tr><td colSpan="4">Nenhuma colheita registrada.</td></tr>}
+            {colheitas.length === 0 && <tr><td colSpan="4">{t('harvests.empty')}</td></tr>}
           </tbody>
         </table>
       </div>

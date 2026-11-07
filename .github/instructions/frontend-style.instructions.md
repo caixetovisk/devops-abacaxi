@@ -23,16 +23,19 @@ Aplique estas regras para qualquer alteração em componentes, páginas, estilos
   - branco dos cards: `#ffffff`
 - Mantenha a aparência simples, funcional e didática.
 - Evite estilos excessivamente modernos, neon, fricção visual ou design pesado.
+- Preserve o suporte a português (padrão), inglês e chinês simplificado.
+- Consulte `abacaxi-frontend/STYLE_GUIDE.md` para as decisões visuais e de idioma.
 
 ## Tipografia
 - Use `system-ui, sans-serif` como fonte base.
 - Preserve hierarquia visual simples e clara.
-- Textos em português, incluindo mensagens de erro, labels e títulos.
+- Use o idioma selecionado para mensagens, labels e títulos; português é o idioma padrão.
 - Não adicione fontes externas sem necessidade explícita.
 
 ## Ícones e marca
 - A identidade visual principal é a fruta 🍍.
 - Use emojis ou elementos visuais simples para reforçar a marca, mas sem exageros.
+- Use imagens de bandeiras do Brasil, Estados Unidos e China como controles clicáveis no seletor de idioma no topo. Não substitua as imagens por emojis; destaque a seleção atual e mantenha rótulos acessíveis.
 - Evite bibliotecas de ícones pesadas.
 
 ## Botões
@@ -60,6 +63,9 @@ Aplique estas regras para qualquer alteração em componentes, páginas, estilos
 - Erros em vermelho e texto curto.
 - Dicas e informativos em cinza claro.
 - Mantenha uma linguagem amigável e direta em português.
+- Todo texto novo ou alterado da interface deve ter traduções em português, inglês e chinês simplificado.
+- O português é o idioma padrão; persista a escolha do usuário no `localStorage`, inclusive após sair da conta.
+- Localize a exibição de datas e valores monetários sem converter os preços existentes de BRL para outra moeda.
 
 ## Regras de implementação
 - Mantenha todo o CSS em `abacaxi-frontend/src/styles.css` ou em estilos locais quando o padrão exigir.
