@@ -29,6 +29,10 @@ header > nav:not(.language-selector) button.ativo { background: #f9c80e; color: 
 
 main { max-width: 960px; margin: 24px auto; padding: 0 16px; }
 
+.abacaxi-large{
+  font-size: xx-large;
+}
+
 .card {
   background: #fff;
   border-radius: 8px;

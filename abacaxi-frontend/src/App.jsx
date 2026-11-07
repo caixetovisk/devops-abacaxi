@@ -34,7 +34,11 @@ export default function App() {
   return (
     <>
       <header>
+<<<<<<< HEAD
         <h1>🍍 {t('brand')}</h1>
+=======
+        <h1> <span class="abacaxi-large">🍍</span> Fazenda de Abacaxis</h1>
+>>>>>>> 0e837b86055c8937bea3d221b6cc08b178e641f6
         <nav>
           {Object.entries(PAGE_LABELS).map(([chave, label]) => (
             <button
