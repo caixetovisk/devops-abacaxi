@@ -51,6 +51,15 @@ As rotas que exigem login precisam do cabeçalho `Authorization: Bearer <token>`
 
 ---
 
+## Documentação interativa da API
+
+Com o backend em execução, acesse:
+
+- **Swagger UI:** http://localhost:3001/docs
+- **Especificação OpenAPI em JSON:** http://localhost:3001/docs.json
+
+No Swagger UI, use **Authorize** para informar o token JWT obtido em `POST /auth/login`. A autorização utiliza o esquema Bearer; informe somente o token.
+
 ## 1. Rodando localmente (com MySQL)
 
 ### Pré-requisitos
@@ -105,6 +114,8 @@ Banco: MySQL (localhost:3306)
 Usuário "admin" criado
 API rodando na porta 3001
 ```
+
+Se aparecer `ECONNREFUSED` para `localhost:3306`, o MySQL não está ativo ou não está aceitando conexões. Com Docker Desktop iniciado, suba o banco com `docker compose up -d` dentro desta pasta e tente iniciar a API novamente.
 
 **5. Teste:** abra http://localhost:3001 no navegador. A resposta deve ser `{"status":"ok", ...}`.
 

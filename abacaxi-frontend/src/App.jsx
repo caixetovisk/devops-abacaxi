@@ -3,38 +3,53 @@ import Login from './pages/Login.jsx';
 import Painel from './pages/Painel.jsx';
 import Colheitas from './pages/Colheitas.jsx';
 import Vendas from './pages/Vendas.jsx';
+import { LanguageSelector, useLanguage } from './i18n.jsx';
 
-const PAGINAS = { painel: 'Painel', colheitas: 'Colheitas', vendas: 'Vendas' };
+const PAGE_LABELS = {
+  painel: 'dashboard',
+  colheitas: 'harvests',
+  vendas: 'sales',
+};
 
 export default function App() {
   const [usuario, setUsuario] = useState(localStorage.getItem('usuario'));
   const [pagina, setPagina] = useState('painel');
+  const { t } = useLanguage();
 
   function sair() {
-    localStorage.clear();
+    localStorage.removeItem('token');
+    localStorage.removeItem('usuario');
     setUsuario(null);
   }
 
-  if (!usuario) return <Login onLogin={setUsuario} />;
+  if (!usuario) {
+    return (
+      <>
+        <LanguageSelector className="login-language-selector" />
+        <Login onLogin={setUsuario} />
+      </>
+    );
+  }
 
   return (
     <>
       <header>
-        <h1>🍍 Fazenda de Abacaxis</h1>
+        <h1>🍍 {t('brand')}</h1>
         <nav>
-          {Object.entries(PAGINAS).map(([chave, nome]) => (
+          {Object.entries(PAGE_LABELS).map(([chave, label]) => (
             <button
               key={chave}
               className={pagina === chave ? 'ativo' : ''}
               onClick={() => setPagina(chave)}
             >
-              {nome}
+              {t(label)}
             </button>
           ))}
         </nav>
         <div className="usuario">
-          {usuario} <button onClick={sair}>Sair</button>
+          {usuario} <button onClick={sair}>{t('logout')}</button>
         </div>
+        <LanguageSelector />
       </header>
       <main>
         {pagina === 'painel' && <Painel />}

@@ -9,7 +9,7 @@
 
 ## Convenções
 
-- Mantenha em português os textos da interface e a documentação voltada às pessoas usuárias; siga o estilo e os padrões já usados nos arquivos próximos.
+- Mantenha a interface localizada em português (padrão), inglês e chinês simplificado; textos novos precisam estar disponíveis nos três idiomas. Documentação voltada às pessoas usuárias segue em português.
 - Use mensagens de commit semânticas no formato `tipo(escopo): descrição breve`, com tipo em minúsculas e descrição no imperativo. Exemplos: `feat(frontend): adicionar filtro de vendas`, `fix(backend): validar quantidade da colheita`, `docs: atualizar guia de estilo`. Use o escopo quando ajudar a identificar a área; escolha tipos como `feat`, `fix`, `docs`, `style`, `refactor`, `test` ou `chore` conforme a natureza da mudança.
 - No backend, use CommonJS e mantenha responsabilidades nas áreas existentes: rotas HTTP em `src/routes/`, persistência/modelos com Sequelize e autenticação compartilhada pelo middleware existente.
 - As rotas de colheitas, vendas e resumo são protegidas por autenticação. Preserve o formato de respostas e os cálculos de estoque/faturamento ao alterar esses fluxos; considere também as telas que consomem as rotas.
@@ -22,3 +22,4 @@
 - Frontend: dentro de `abacaxi-frontend`, execute `npm run build`.
 - Backend: dentro de `abacaxi-backend`, execute `npm start` com banco e variáveis de ambiente configurados; `npm run dev` inicia em modo de desenvolvimento com reinicialização automática.
 - Os `package.json` atuais não definem scripts de teste ou lint. Não presuma que esses comandos existem; se uma alteração exigir validação adicional, descreva e execute uma verificação apropriada.
+- O frontend oferece português (`pt`, padrão), inglês (`en`) e chinês simplificado (`zh`); mantenha os textos visíveis, formatação de datas/moedas e seletor de bandeiras localizados, salvando a preferência no `localStorage`.

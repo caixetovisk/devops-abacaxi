@@ -30,8 +30,8 @@ Use vermelho apenas para erro ou exclusão. Evite introduzir novas cores de dest
 
 ## Marca e ícones
 
-- O abacaxi `🍍` é o único ícone visual atualmente usado, junto ao nome “Fazenda de Abacaxis” no cabeçalho e no login. Não há biblioteca de ícones instalada.
-- Preserve o emoji como elemento de marca. Os botões atuais usam rótulos textuais (“Entrar”, “Salvar”, “Excluir”, “Sair”); mantenha esse padrão para ações.
+- O abacaxi `🍍` identifica a marca no cabeçalho e no login. Bandeiras (`🇧🇷`, `🇺🇸`, `🇨🇳`) identificam as opções do seletor de idioma no topo da página. Não há biblioteca de ícones instalada.
+- Preserve o emoji de abacaxi como elemento de marca e as bandeiras como seletor de idioma. Os botões de ação usam rótulos textuais; mantenha esse padrão para que as ações não dependam apenas de ícones.
 - Se uma nova função realmente precisar de um ícone, prefira um SVG local consistente e acessível. Ícones decorativos devem ser ocultos de tecnologias assistivas; ícones que funcionam como controles precisam de nome acessível. Evite adicionar fontes ou bibliotecas de ícones para uso pontual.
 
 ## Botões e controles

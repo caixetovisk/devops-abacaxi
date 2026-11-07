@@ -1,0 +1,11 @@
+{
+  "name": "devops-abacaxi",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "npm run dev --prefix abacaxi-frontend",
+    "build": "npm run build --prefix abacaxi-frontend",
+    "dev:api": "npm run dev --prefix abacaxi-backend",
+    "start:api": "npm start --prefix abacaxi-backend"
+  }
+}

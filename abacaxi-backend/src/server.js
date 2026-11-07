@@ -3,13 +3,20 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
+const swaggerUi = require('swagger-ui-express');
 const { sequelize, Usuario } = require('./models');
 const auth = require('./middleware/auth');
+const openapiSpecification = require('./openapi');
 
 const app = express();
 
 app.use(cors({ origin: process.env.FRONTEND_URL || '*' }));
 app.use(express.json());
+
+app.get('/docs.json', (req, res) => {
+  res.json(openapiSpecification);
+});
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(openapiSpecification));
 
 // Rota pública para testar se a API está no ar (usada também pelo Render)
 app.get('/', (req, res) => {
@@ -50,6 +57,6 @@ async function iniciar() {
 }
 
 iniciar().catch((err) => {
-  console.error('Falha ao iniciar a API:', err.message);
+  console.error('Falha ao iniciar a API:', err);
   process.exit(1);
 });
