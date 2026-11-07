@@ -47,6 +47,12 @@ src/
 | DELETE | `/vendas/:id` | sim | Exclui uma venda |
 | GET | `/resumo` | sim | Totais para o painel |
 
+## Documentação interativa (Swagger)
+
+Com a API em execução, acesse [`/api-docs`](http://localhost:3001/api-docs) para explorar e testar as rotas. A especificação OpenAPI em JSON está disponível em [`/api-docs.json`](http://localhost:3001/api-docs.json).
+
+Para testar rotas protegidas, faça login em `POST /auth/login`, copie o token retornado e use **Authorize** na interface Swagger com o token Bearer.
+
 As rotas que exigem login precisam do cabeçalho `Authorization: Bearer <token>`.
 
 ---

@@ -3,8 +3,10 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
+const swaggerUi = require('swagger-ui-express');
 const { sequelize, Usuario } = require('./models');
 const auth = require('./middleware/auth');
+const openapi = require('./openapi');
 
 const app = express();
 
@@ -22,6 +24,11 @@ app.use('/auth', require('./routes/auth'));
 app.use('/colheitas', auth, require('./routes/colheitas'));
 app.use('/vendas', auth, require('./routes/vendas'));
 app.use('/resumo', auth, require('./routes/resumo'));
+
+app.get('/api-docs.json', (req, res) => {
+  res.json(openapi);
+});
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openapi));
 
 // Tratamento de erros inesperados
 app.use((err, req, res, next) => {
