@@ -9,6 +9,8 @@ Interface web em **React + Vite** do sistema da Fazenda de Abacaxis. Tem as tela
 
 Este projeto só exibe as telas. Os dados vêm da API, que fica na pasta [../abacaxi-backend](../abacaxi-backend) do mesmo repositório (**devops-abacaxi**).
 
+O frontend está disponível em português (padrão), inglês e chinês simplificado. Use as bandeiras no topo da tela para trocar o idioma; a preferência fica salva no navegador. As traduções ficam em [src/i18n.js](src/i18n.js).
+
 ## Como o frontend encontra a API?
 
 Pela variável de ambiente **`VITE_API_URL`**. Veja [src/api.js](src/api.js).
@@ -27,7 +29,10 @@ src/
 ├── main.jsx          # ponto de entrada
 ├── App.jsx           # menu e troca de páginas
 ├── api.js            # função que chama a API (usa VITE_API_URL)
+├── i18n.js           # traduções e formatação localizada
 ├── styles.css
+├── components/
+│   └── SeletorIdioma.jsx
 └── pages/
     ├── Login.jsx
     ├── Painel.jsx

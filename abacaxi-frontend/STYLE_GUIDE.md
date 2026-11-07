@@ -30,7 +30,14 @@ Ao adicionar estilos, reutilize essas cores e os seletores existentes em `src/st
 
 - O frontend não possui biblioteca de ícones. Não adicione uma dependência apenas para introduzir ícones.
 - O abacaxi `🍍` é o elemento de marca já usado nos títulos da aplicação e do login. Preserve-o quando esses títulos forem apresentados.
+- A troca de idioma usa bandeiras do Brasil, Estados Unidos e China no topo da tela; mantenha botões acessíveis com nomes de idioma e indicação do idioma selecionado.
 - Prefira rótulos de texto claros para ações e navegação. Se um símbolo for necessário, use-o de forma consistente e não como único identificador de uma ação.
+
+## Idiomas
+
+- A interface oferece português (`pt-BR`), inglês (`en-US`) e chinês simplificado (`zh-CN`). O português é o idioma padrão.
+- A preferência escolhida é persistida em `localStorage`; não a remova ao sair da conta.
+- Centralize rótulos e mensagens traduzíveis em `src/i18n.js`, incluindo erros conhecidos da API. Formate datas e valores monetários com a localidade ativa; os valores continuam em reais (BRL).
 
 ## Botões e ações
 

@@ -21,6 +21,20 @@ header nav { display: flex; gap: 8px; flex: 1; }
 header nav button { background: transparent; border: 1px solid #fff; }
 header nav button.ativo { background: #f9c80e; color: #333; border-color: #f9c80e; }
 .usuario button { background: #1b5e20; margin-left: 8px; }
+.seletor-idioma { display: flex; gap: 4px; }
+header nav.seletor-idioma { flex: 0; }
+.seletor-idioma button,
+header nav.seletor-idioma button {
+  background: transparent;
+  border: 1px solid transparent;
+  padding: 5px 7px;
+  font-size: 1.25rem;
+}
+header nav.seletor-idioma button.idioma-ativo { border-color: #f9c80e; }
+.seletor-idioma button:focus-visible { outline: 2px solid #f9c80e; outline-offset: 2px; }
+.login-pagina { position: relative; min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 64px 16px 16px; }
+.login-pagina > .seletor-idioma { position: absolute; top: 16px; right: 16px; }
+.login-pagina .login { min-height: 0; width: 100%; }
 
 main { max-width: 960px; margin: 24px auto; padding: 0 16px; }
 

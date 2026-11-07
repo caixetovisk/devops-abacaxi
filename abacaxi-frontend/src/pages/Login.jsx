@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { api } from '../api.js';
+import { traduzirErro } from '../i18n.js';
 
-export default function Login({ onLogin }) {
+export default function Login({ onLogin, idioma, t }) {
   const [usuario, setUsuario] = useState('');
   const [senha, setSenha] = useState('');
   const [erro, setErro] = useState('');
@@ -17,7 +18,7 @@ export default function Login({ onLogin }) {
       localStorage.setItem('usuario', dados.usuario);
       onLogin(dados.usuario);
     } catch (err) {
-      setErro(err.message === 'Failed to fetch' ? 'Não foi possível conectar à API' : err.message);
+      setErro(err.message);
     } finally {
       setCarregando(false);
     }
@@ -26,21 +27,21 @@ export default function Login({ onLogin }) {
   return (
     <div className="login">
       <form className="card" onSubmit={entrar}>
-        <h1>🍍 Fazenda de Abacaxis</h1>
+        <h1>🍍 {t('appTitle')}</h1>
         <label>
-          Usuário
+          {t('username')}
           <input value={usuario} onChange={(e) => setUsuario(e.target.value)} required autoFocus />
         </label>
         <label>
-          Senha
+          {t('password')}
           <input type="password" value={senha} onChange={(e) => setSenha(e.target.value)} required />
         </label>
-        {erro && <p className="erro">{erro}</p>}
+        {erro && <p className="erro">{traduzirErro(erro, idioma)}</p>}
         <button type="submit" disabled={carregando}>
-          {carregando ? 'Entrando...' : 'Entrar'}
+          {carregando ? t('signingIn') : t('login')}
         </button>
         {carregando && (
-          <p className="dica">No plano gratuito do Render a API pode levar até 1 minuto para "acordar".</p>
+          <p className="dica">{t('wakingUp')}</p>
         )}
       </form>
     </div>

@@ -1,6 +1,6 @@
 ---
 description: "Use when creating or editing frontend pages, React components, or styles in abacaxi-frontend. Follow the established visual design, typography, colors, buttons, and icon conventions."
-applyTo: ["abacaxi-frontend/src/**/*.jsx", "abacaxi-frontend/src/**/*.css"]
+applyTo: ["abacaxi-frontend/src/**/*.js", "abacaxi-frontend/src/**/*.jsx", "abacaxi-frontend/src/**/*.css"]
 ---
 
 # Instruções visuais do frontend
@@ -10,3 +10,4 @@ applyTo: ["abacaxi-frontend/src/**/*.jsx", "abacaxi-frontend/src/**/*.css"]
 - Preserve a identidade visual atual: fonte `system-ui`, tons claros de fundo, cabeçalho marrom, ações verdes, seleção amarela e erros/ações destrutivas vermelhos.
 - Não adicione biblioteca de ícones ou fonte externa sem necessidade. Mantenha o abacaxi como marca e dê rótulos de texto claros às ações.
 - Mantenha formulários acessíveis, layouts adaptáveis a telas estreitas e estados visíveis para ações desabilitadas e mensagens de erro.
+- Para adicionar ou alterar textos de interface, atualize as traduções em `abacaxi-frontend/src/i18n.js` para português, inglês e chinês; mantenha o português como padrão e preserve a preferência armazenada em `localStorage`.
