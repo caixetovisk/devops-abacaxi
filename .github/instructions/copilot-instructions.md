@@ -16,6 +16,11 @@
 - Faça mudanças pequenas e coerentes com a interface atual. Não adicione dependências, frameworks ou scripts sem necessidade; não presuma a existência de testes ou lint: os `package.json` atuais não os definem.
 - Ao criar commits, use mensagens semânticas no formato `tipo(escopo): descrição` (por exemplo, `feat(frontend): adicionar filtro de vendas`). Escolha um tipo preciso, como `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`, `build` ou `ci`; escreva uma descrição curta, clara e no imperativo. Não crie commits sem relação entre si no mesmo changeset.
 
+## Instruções relacionadas
+
+- Para implementar ou alterar o frontend, siga também [frontend.instructions.md](./frontend.instructions.md).
+- Para decisões sobre cores, tipografia, ícones, botões e layout, consulte o [guia visual do frontend](../../abacaxi-frontend/STYLE_GUIDE.md).
+
 ## Build e execução
 
 - Frontend: em `abacaxi-frontend/`, `npm run dev` inicia o servidor local e `npm run build` valida e gera o build de produção.

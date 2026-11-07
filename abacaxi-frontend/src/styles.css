@@ -22,6 +22,54 @@ header nav button { background: transparent; border: 1px solid #fff; }
 header nav button.ativo { background: #f9c80e; color: #333; border-color: #f9c80e; }
 .usuario button { background: #0a5d10; margin-left: 8px; }
 
+.seletor-idioma {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 10;
+}
+.seletor-idioma summary {
+  display: grid;
+  width: 52px;
+  height: 52px;
+  place-items: center;
+  border: 2px solid #387403;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  font-size: 1.6rem;
+  list-style: none;
+}
+.seletor-idioma summary::-webkit-details-marker { display: none; }
+.seletor-idioma summary svg { width: 28px; height: 28px; fill: none; stroke: #387403; stroke-width: 1.8; }
+.seletor-idioma summary:focus-visible,
+.menu-idiomas button:focus-visible { outline: 3px solid #f9c80e; outline-offset: 2px; }
+.menu-idiomas {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 8px);
+  display: grid;
+  min-width: 168px;
+  gap: 4px;
+  padding: 8px;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+}
+.menu-idiomas button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  background: #fff;
+  color: #333;
+  text-align: left;
+}
+.menu-idiomas button svg { display: block; width: 24px; height: 16px; flex: 0 0 24px; }
+.menu-idiomas button:hover,
+.menu-idiomas button.idioma-ativo { background: #fdf8e6; }
+
 main { max-width: 960px; margin: 24px auto; padding: 0 16px; }
 
 .abacaxi-large{font-size: xx-large;}

@@ -60,3 +60,9 @@ As cores refletem os valores atuais em `src/styles.css`. Reutilize-os em vez de 
 - O cabeçalho pode quebrar linha; formulários e indicadores devem continuar utilizáveis em telas estreitas.
 - Não remova rótulos, foco de teclado, estados desabilitados ou feedback de erro ao ajustar o visual.
 - Preserve contraste suficiente entre texto, fundo e estados de ação. Não comunique sucesso, erro ou seleção apenas por cor.
+
+## Seletor de idioma
+
+- O seletor fica fixo no canto inferior direito em todas as telas. Seu botão circular exibe um ícone de idioma/globo; ao abrir, mostra bandeiras do Brasil, Estados Unidos e China ao lado de Português, English e 中文.
+- Mantenha nomes acessíveis, estado selecionado (`aria-pressed`) e interação por teclado no menu de idiomas.
+- A preferência fica salva em `localStorage` e deve sobreviver ao logout.
