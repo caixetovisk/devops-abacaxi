@@ -50,7 +50,7 @@ export default function App() {
   return (
     <>
       <header>
-        <h1>🍍 {t('appTitle')}</h1>
+        <h1><span className="abacaxi-large">🍍</span> {t('appTitle')}</h1>
         <nav>
           {PAGINAS.map(({ id, traducao }) => (
             <button
