@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import { api } from '../api.js';
+import LanguageSelector from '../components/LanguageSelector.jsx';
+import { useLanguage } from '../i18n.jsx';
 
 export default function Login({ onLogin }) {
+  const { t, traduzirErro } = useLanguage();
   const [usuario, setUsuario] = useState('');
   const [senha, setSenha] = useState('');
   const [erro, setErro] = useState('');
@@ -17,32 +20,35 @@ export default function Login({ onLogin }) {
       localStorage.setItem('usuario', dados.usuario);
       onLogin(dados.usuario);
     } catch (err) {
-      setErro(err.message === 'Failed to fetch' ? 'Não foi possível conectar à API' : err.message);
+      setErro(err.message);
     } finally {
       setCarregando(false);
     }
   }
 
   return (
-    <div className="login">
-      <form className="card" onSubmit={entrar}>
-        <h1>🍍 Fazenda de Abacaxis</h1>
-        <label>
-          Usuário
-          <input value={usuario} onChange={(e) => setUsuario(e.target.value)} required autoFocus />
-        </label>
-        <label>
-          Senha
-          <input type="password" value={senha} onChange={(e) => setSenha(e.target.value)} required />
-        </label>
-        {erro && <p className="erro">{erro}</p>}
-        <button type="submit" disabled={carregando}>
-          {carregando ? 'Entrando...' : 'Entrar'}
-        </button>
-        {carregando && (
-          <p className="dica">No plano gratuito do Render a API pode levar até 1 minuto para "acordar".</p>
-        )}
-      </form>
-    </div>
+    <>
+      <header className="login-header">
+        <LanguageSelector />
+      </header>
+      <div className="login">
+        <form className="card" onSubmit={entrar}>
+          <h1>🍍 Fazenda Abacaxi</h1>
+          <label>
+            {t('login.username')}
+            <input value={usuario} onChange={(e) => setUsuario(e.target.value)} required autoFocus />
+          </label>
+          <label>
+            {t('login.password')}
+            <input type="password" value={senha} onChange={(e) => setSenha(e.target.value)} required />
+          </label>
+          {erro && <p className="erro">{traduzirErro(erro)}</p>}
+          <button type="submit" disabled={carregando}>
+            {carregando ? t('login.entering') : t('login.enter')}
+          </button>
+          {carregando && <p className="dica">{t('login.waking')}</p>}
+        </form>
+      </div>
+    </>
   );
 }
