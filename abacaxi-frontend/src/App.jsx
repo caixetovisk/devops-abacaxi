@@ -37,9 +37,17 @@ function AppContent() {
     localStorage.removeItem('token');
     localStorage.removeItem('usuario');
     setUsuario(null);
+    setPagina('inicio');
   }
 
-  if (!usuario) return <Login onLogin={setUsuario} />;
+  function entrar(nome) {
+    setUsuario(nome);
+    setPagina('inicio');
+  }
+
+  if (!usuario && pagina === 'login') {
+    return <Login onLogin={entrar} onCancel={() => setPagina('inicio')} />;
+  }
 
   return (
     <>
@@ -47,7 +55,13 @@ function AppContent() {
         <h1>🍍 Fazenda Abacaxi</h1>
         <div className="usuario">
           <LanguageSelector />
-          {usuario} <button onClick={sair}>{t('common.exit')}</button>
+          {usuario ? (
+            <>
+              {usuario} <button onClick={sair}>{t('common.exit')}</button>
+            </>
+          ) : (
+            <button onClick={() => setPagina('login')}>{t('login.enter')}</button>
+          )}
         </div>
         <div className="navegacao">
           <nav className="site-nav" aria-label={t('nav.mainLabel')}>
@@ -62,26 +76,28 @@ function AppContent() {
               </button>
             ))}
           </nav>
-          <nav className="gestao-nav" aria-label={t('nav.managementLabel')}>
-            <span>{t('common.management')}</span>
-            {GESTAO.map(([chave, rotulo]) => (
-              <button
-                key={chave}
-                className={pagina === chave ? 'ativo' : ''}
-                aria-current={pagina === chave ? 'page' : undefined}
-                onClick={() => setPagina(chave)}
-              >
-                {t(rotulo)}
-              </button>
-            ))}
-          </nav>
+          {usuario && (
+            <nav className="gestao-nav" aria-label={t('nav.managementLabel')}>
+              <span>{t('common.management')}</span>
+              {GESTAO.map(([chave, rotulo]) => (
+                <button
+                  key={chave}
+                  className={pagina === chave ? 'ativo' : ''}
+                  aria-current={pagina === chave ? 'page' : undefined}
+                  onClick={() => setPagina(chave)}
+                >
+                  {t(rotulo)}
+                </button>
+              ))}
+            </nav>
+          )}
         </div>
       </header>
       <main>
         {SECOES.some(([chave]) => chave === pagina) && <Institucional pagina={pagina} />}
-        {pagina === 'painel' && <Painel />}
-        {pagina === 'colheitas' && <Colheitas />}
-        {pagina === 'vendas' && <Vendas />}
+        {usuario && pagina === 'painel' && <Painel />}
+        {usuario && pagina === 'colheitas' && <Colheitas />}
+        {usuario && pagina === 'vendas' && <Vendas />}
       </main>
     </>
   );

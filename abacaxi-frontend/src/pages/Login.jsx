@@ -3,7 +3,7 @@ import { api } from '../api.js';
 import LanguageSelector from '../components/LanguageSelector.jsx';
 import { useLanguage } from '../i18n.jsx';
 
-export default function Login({ onLogin }) {
+export default function Login({ onLogin, onCancel }) {
   const { t, traduzirErro } = useLanguage();
   const [usuario, setUsuario] = useState('');
   const [senha, setSenha] = useState('');
@@ -47,6 +47,11 @@ export default function Login({ onLogin }) {
             {carregando ? t('login.entering') : t('login.enter')}
           </button>
           {carregando && <p className="dica">{t('login.waking')}</p>}
+          {onCancel && (
+            <button type="button" onClick={onCancel}>
+              {t('nav.home')}
+            </button>
+          )}
         </form>
       </div>
     </>
