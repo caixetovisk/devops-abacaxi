@@ -28,6 +28,7 @@ As **tabelas são criadas sozinhas** quando a API inicia (`sequelize.sync()`). O
 ```
 src/
 ├── server.js          # inicia a API, cria tabelas e o usuário admin
+├── openapi.js         # especificação OpenAPI da API
 ├── database.js        # escolhe MySQL ou PostgreSQL
 ├── models.js          # tabelas: usuarios, colheitas, vendas
 ├── estoque.js         # cálculo do estoque
