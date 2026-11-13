@@ -40,7 +40,8 @@ O objetivo do projeto é ensinar deploy em serviços separados com Render, mante
 - O valor de `VITE_API_URL` é “gravado” no build, então qualquer alteração exige rebuild/deploy do projeto.
 - Use `src/api.js` para centralizar chamadas à API.
 - Não hardcode a URL da API em componentes ou páginas; use a variável de ambiente.
-- Mantenha a interface em português e consistente com a linguagem do projeto.
+- O português é o idioma padrão da interface; mantenha também as traduções em inglês e chinês simplificado atualizadas em `src/i18n.jsx`.
+- Preserve o seletor de idioma com bandeiras e a preferência salva no `localStorage`.
 
 ## Fluxo de desenvolvimento local
 
@@ -70,7 +71,7 @@ O frontend normalmente roda em `http://localhost:5173` e a API em `http://localh
 
 ## Guia de estilo do projeto
 
-- Escreva código, textos e mensagens em português, com linguagem simples e direta.
+- Escreva código e mensagens padrão em português, com linguagem simples e direta; textos visíveis devem ter traduções para todos os idiomas suportados.
 - Mantenha a mesma convenção de nomenclatura já usada no projeto:
   - variáveis e funções em `camelCase`
   - componentes React em `PascalCase`
