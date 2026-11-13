@@ -28,6 +28,6 @@ export async function api(caminho, { method = 'GET', body } = {}) {
 
 export const formatarData = (data, locale = 'pt-BR') =>
   new Date(`${data}T00:00:00`).toLocaleDateString(locale);
-export const formatarReais = (valor, locale = 'pt-BR') =>
-  Number(valor).toLocaleString(locale, { style: 'currency', currency: 'BRL' });
+export const formatarDolares = (valor, locale = 'pt-BR') =>
+  Number(valor).toLocaleString(locale, { style: 'currency', currency: 'USD' });
 export const hoje = () => new Date().toISOString().slice(0, 10);
