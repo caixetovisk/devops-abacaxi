@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { api, formatarReais } from '../api.js';
+import { api, formatarDolares } from '../api.js';
 import { t } from '../i18n.js';
 
 export default function Painel({ lang }) {
@@ -18,7 +18,7 @@ export default function Painel({ lang }) {
       <div className="card"><span>{t(lang, 'dashboard.totalHarvested')}</span><strong>{resumo.colhido}</strong></div>
       <div className="card"><span>{t(lang, 'dashboard.totalSold')}</span><strong>{resumo.vendido}</strong></div>
       <div className="card"><span>{t(lang, 'dashboard.inStock')}</span><strong>{resumo.estoque}</strong></div>
-      <div className="card"><span>{t(lang, 'dashboard.revenue')}</span><strong>{formatarReais(resumo.faturamento)}</strong></div>
+      <div className="card"><span>{t(lang, 'dashboard.revenue')}</span><strong>{formatarDolares(resumo.faturamento)}</strong></div>
     </div>
   );
 }

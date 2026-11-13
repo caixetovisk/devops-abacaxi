@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { api, formatarData, formatarReais, hoje } from '../api.js';
+import { api, formatarData, formatarDolares, hoje } from '../api.js';
 import { t, traduzirErro } from '../i18n.js';
 
 export default function Vendas({ lang }) {
@@ -81,8 +81,8 @@ export default function Vendas({ lang }) {
                 <td>{formatarData(v.data)}</td>
                 <td>{v.cliente}</td>
                 <td>{v.quantidade}</td>
-                <td>{formatarReais(v.preco_unitario)}</td>
-                <td>{formatarReais(v.quantidade * Number(v.preco_unitario))}</td>
+                <td>{formatarDolares(v.preco_unitario)}</td>
+                <td>{formatarDolares(v.quantidade * Number(v.preco_unitario))}</td>
                 <td><button className="excluir" onClick={() => excluir(v.id)}>{t(lang, 'form.delete')}</button></td>
               </tr>
             ))}
