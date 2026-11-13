@@ -267,5 +267,45 @@ Siga estas convenções para manter o código alinhado com o padrão já adotado
 
 Use esses arquivos como fonte de verdade para fluxo local e deploy.
 
-# Regras
-Em caso de dúvidas pergunte ao invés de supor.
+## 10. Commits semânticos
+
+Use commits em formato Conventional Commits para manter o histórico consistente e legível.
+
+Formato base:
+
+```text
+<tipo>(<escopo opcional>): <descrição curta>
+```
+
+Tipos mais comuns para este projeto:
+
+- `feat`: nova funcionalidade
+- `fix`: correção de bug
+- `docs`: documentação ou instruções
+- `style`: ajustes visuais ou formatação
+- `refactor`: reorganização sem mudança de comportamento
+- `test`: testes
+- `chore`: tarefas de manutenção e configuração
+
+Exemplos:
+
+```text
+feat(api): add inventory summary endpoint
+fix(frontend): correct login redirect after token expiration
+docs: add project Copilot instructions
+style(frontend): adjust buttons and visual tokens
+```
+
+Regras:
+
+- A descrição deve começar com verbo no imperativo, por exemplo: `add`, `fix`, `update`, `remove`.
+- Use mensagens curtas, claras e em inglês, salvo quando a convenção do projeto exigir português.
+- Evite títulos genéricos como `Atualização`, `Melhoria`, `Teste final`.
+- Quando o commit incluir documentação ou instruções, use `docs:`.
+- Quando o commit alterar apenas organização interna sem mudar funcionalidade, prefira `refactor:` ou `chore:`.
+
+## 11. Regras gerais
+
+- Em caso de dúvidas, pergunte ao invés de supor.
+- Antes de criar um commit, verifique se a alteração está pronta e se o histórico está limpo.
+- Mantenha a mensagem do commit alinhada com o tipo de alteração realizada.
