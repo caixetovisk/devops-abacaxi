@@ -13,6 +13,19 @@ export const translations = {
       renderDelay: 'No plano gratuito do Render a API pode levar até 1 minuto para "acordar".',
       connectionError: 'Não foi possível conectar à API',
     },
+    errors: {
+      invalidCredentials: 'Usuário ou senha inválidos',
+      harvestInput: 'Informe a data e uma quantidade maior que zero',
+      harvestNotFound: 'Colheita não encontrada',
+      harvestAlreadySold: 'Não é possível excluir: os abacaxis desta colheita já foram vendidos',
+      saleInput: 'Informe data, quantidade e preço maiores que zero',
+      insufficientStock: 'Estoque insuficiente. Disponível: {quantidade}',
+      saleNotFound: 'Venda não encontrada',
+      tokenMissing: 'Token não informado',
+      tokenInvalid: 'Token inválido ou expirado',
+      server: 'Erro interno no servidor',
+      request: 'Erro na requisição',
+    },
     dashboard: {
       totalHarvested: 'Total colhido',
       totalSold: 'Total vendido',
@@ -35,7 +48,7 @@ export const translations = {
       noHarvests: 'Nenhuma colheita registrada.',
       noSales: 'Nenhuma venda registrada.',
       qtyShort: 'Qty.',
-      priceUnitShort: 'Unit price',
+      priceUnitShort: 'Preço unitário',
       total: 'Total',
     },
   },
@@ -51,6 +64,19 @@ export const translations = {
       renderDelay: 'On Render free plan, the API may take up to 1 minute to "wake up".',
       connectionError: 'Unable to connect to the API',
     },
+    errors: {
+      invalidCredentials: 'Invalid username or password',
+      harvestInput: 'Enter a date and a quantity greater than zero',
+      harvestNotFound: 'Harvest not found',
+      harvestAlreadySold: 'Cannot delete: pineapples from this harvest have already been sold',
+      saleInput: 'Enter a date, quantity, and price greater than zero',
+      insufficientStock: 'Insufficient stock. Available: {quantidade}',
+      saleNotFound: 'Sale not found',
+      tokenMissing: 'Token not provided',
+      tokenInvalid: 'Invalid or expired token',
+      server: 'Internal server error',
+      request: 'Request failed',
+    },
     dashboard: {
       totalHarvested: 'Total harvested',
       totalSold: 'Total sold',
@@ -62,7 +88,7 @@ export const translations = {
       date: 'Date',
       quantity: 'Quantity',
       observation: 'Observation',
-      priceUnit: 'Unit price (USD)',
+      priceUnit: 'Unit price (R$)',
       customer: 'Customer',
       save: 'Save',
       delete: 'Delete',
@@ -88,6 +114,19 @@ export const translations = {
       entering: '登录中...',
       renderDelay: '在 Render 的免费计划上，API 可能需要长达 1 分钟才能“唤醒”。',
       connectionError: '无法连接到 API',
+    },
+    errors: {
+      invalidCredentials: '用户名或密码无效',
+      harvestInput: '请输入日期和大于零的数量',
+      harvestNotFound: '未找到收成记录',
+      harvestAlreadySold: '无法删除：该批收成中的凤梨已售出',
+      saleInput: '请输入日期、大于零的数量和价格',
+      insufficientStock: '库存不足。可用数量：{quantidade}',
+      saleNotFound: '未找到销售记录',
+      tokenMissing: '未提供令牌',
+      tokenInvalid: '令牌无效或已过期',
+      server: '服务器内部错误',
+      request: '请求失败',
     },
     dashboard: {
       totalHarvested: '总收成',
@@ -138,4 +177,29 @@ export function t(lang, key) {
   }
 
   return value;
+}
+
+const API_ERROR_KEYS = {
+  'Usuário ou senha inválidos': 'errors.invalidCredentials',
+  'Informe a data e uma quantidade maior que zero': 'errors.harvestInput',
+  'Colheita não encontrada': 'errors.harvestNotFound',
+  'Não é possível excluir: os abacaxis desta colheita já foram vendidos': 'errors.harvestAlreadySold',
+  'Informe data, quantidade e preço maiores que zero': 'errors.saleInput',
+  'Venda não encontrada': 'errors.saleNotFound',
+  'Token não informado': 'errors.tokenMissing',
+  'Token inválido ou expirado': 'errors.tokenInvalid',
+  'Erro interno no servidor': 'errors.server',
+  'Erro na requisição': 'errors.request',
+};
+
+export function traduzirErro(lang, mensagem) {
+  if (mensagem === 'Failed to fetch') return t(lang, 'login.connectionError');
+
+  const estoqueInsuficiente = /^Estoque insuficiente\. Disponível: (.+)$/.exec(mensagem);
+  if (estoqueInsuficiente) {
+    return t(lang, 'errors.insufficientStock').replace('{quantidade}', estoqueInsuficiente[1]);
+  }
+
+  const chave = API_ERROR_KEYS[mensagem];
+  return chave ? t(lang, chave) : mensagem;
 }

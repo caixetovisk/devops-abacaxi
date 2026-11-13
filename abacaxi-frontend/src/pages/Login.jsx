@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { api } from '../api.js';
-import { t } from '../i18n.js';
+import { t, traduzirErro } from '../i18n.js';
 
 export default function Login({ onLogin, lang }) {
   const [usuario, setUsuario] = useState('');
@@ -18,7 +18,7 @@ export default function Login({ onLogin, lang }) {
       localStorage.setItem('usuario', dados.usuario);
       onLogin(dados.usuario);
     } catch (err) {
-      setErro(err.message === 'Failed to fetch' ? t(lang, 'login.connectionError') : err.message);
+      setErro(traduzirErro(lang, err.message));
     } finally {
       setCarregando(false);
     }

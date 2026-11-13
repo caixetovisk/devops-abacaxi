@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { api, formatarData, hoje } from '../api.js';
-import { t } from '../i18n.js';
+import { t, traduzirErro } from '../i18n.js';
 
 export default function Colheitas({ lang }) {
   const [colheitas, setColheitas] = useState([]);
   const [form, setForm] = useState({ data: hoje(), quantidade: '', observacao: '' });
   const [erro, setErro] = useState('');
 
-  const carregar = () => api('/colheitas').then(setColheitas).catch((err) => setErro(err.message));
+  const carregar = () => api('/colheitas').then(setColheitas).catch((err) => setErro(traduzirErro(lang, err.message)));
   useEffect(() => { carregar(); }, []);
 
   async function salvar(e) {
@@ -21,7 +21,7 @@ export default function Colheitas({ lang }) {
       setForm({ ...form, quantidade: '', observacao: '' });
       carregar();
     } catch (err) {
-      setErro(err.message);
+      setErro(traduzirErro(lang, err.message));
     }
   }
 
@@ -31,7 +31,7 @@ export default function Colheitas({ lang }) {
       await api(`/colheitas/${id}`, { method: 'DELETE' });
       carregar();
     } catch (err) {
-      setErro(err.message);
+      setErro(traduzirErro(lang, err.message));
     }
   }
 

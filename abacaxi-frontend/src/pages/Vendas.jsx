@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { api, formatarData, formatarReais, hoje } from '../api.js';
-import { t } from '../i18n.js';
+import { t, traduzirErro } from '../i18n.js';
 
 export default function Vendas({ lang }) {
   const [vendas, setVendas] = useState([]);
   const [form, setForm] = useState({ data: hoje(), quantidade: '', preco_unitario: '', cliente: '' });
   const [erro, setErro] = useState('');
 
-  const carregar = () => api('/vendas').then(setVendas).catch((err) => setErro(err.message));
+  const carregar = () => api('/vendas').then(setVendas).catch((err) => setErro(traduzirErro(lang, err.message)));
   useEffect(() => { carregar(); }, []);
 
   async function salvar(e) {
@@ -25,7 +25,7 @@ export default function Vendas({ lang }) {
       setForm({ ...form, quantidade: '', preco_unitario: '', cliente: '' });
       carregar();
     } catch (err) {
-      setErro(err.message);
+      setErro(traduzirErro(lang, err.message));
     }
   }
 
@@ -35,7 +35,7 @@ export default function Vendas({ lang }) {
       await api(`/vendas/${id}`, { method: 'DELETE' });
       carregar();
     } catch (err) {
-      setErro(err.message);
+      setErro(traduzirErro(lang, err.message));
     }
   }
 
