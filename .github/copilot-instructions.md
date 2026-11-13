@@ -9,7 +9,7 @@
 
 ## Convenções de implementação
 
-- Preserve os padrões de formatação e nomenclatura estabelecidos no código próximo; mantenha textos da interface e mensagens em português.
+- Preserve os padrões de formatação e nomenclatura estabelecidos no código próximo; use `pt-BR` como idioma padrão da interface.
 - Para telas e estilos, siga a identidade visual documentada em `abacaxi-frontend/GUIA-DE-ESTILO.md` e as instruções em `.github/instructions/frontend-visual-style.instructions.md`: rosa predominante, fonte `Arial Black` e título “Fazenda Abacaxi”.
 - Preserve a separação entre backend e frontend e evite adicionar dependências sem necessidade.
 - Mantenha a lógica de negócio no backend. Colheitas, vendas e resumo devem usar os modelos e utilitários existentes, sem duplicar o cálculo de estoque.
@@ -18,6 +18,14 @@
 - A API usa respostas JSON e o formato `{ erro: "..." }` para erros esperados. Preserve os códigos HTTP e os formatos consumidos pelo frontend.
 - O frontend deve chamar a API por `src/api.js`, que usa `VITE_API_URL`; não fixe URLs de produção em componentes. Variáveis `VITE_*` são incorporadas no build.
 - Configure segredos e endereços por variáveis de ambiente. O backend usa `DATABASE_URL` para PostgreSQL ou `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER` e `DB_PASSWORD` para MySQL; consulte os READMEs para a configuração completa.
+
+## Idiomas e traduções
+
+- O frontend oferece `pt-BR` (padrão), `en-US`, `zh-CN`, `ja-JP`, `es-ES` e `fr-FR`; preserve esses locales e o seletor de idioma.
+- Centralize textos da interface em `abacaxi-frontend/src/translations.js`. Use `useLanguage()` e `t('chave')` nos componentes, em vez de inserir texto visível diretamente no JSX.
+- Ao adicionar ou alterar um texto, atualize a chave em todos os locales para manter traduções completas; siga o padrão de nomes de chaves já usado no arquivo.
+- Mensagens de erro da API devem passar por `traduzirErro()`; se surgir uma nova mensagem esperada do backend, mapeie-a em `traducoesErrosApi` e forneça a tradução correspondente em cada locale.
+- A preferência de idioma é salva no `localStorage` e aplicada a `document.documentElement.lang`; use `idioma` ao formatar valores e datas que dependam de locale.
 
 ## Comandos e validação
 
