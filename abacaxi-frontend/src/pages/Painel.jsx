@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { api, formatarDolares } from '../api.js';
-import { t } from '../i18n.js';
+import { t, traduzirErro } from '../i18n.js';
 
 export default function Painel({ lang }) {
   const [resumo, setResumo] = useState(null);
   const [erro, setErro] = useState('');
 
   useEffect(() => {
-    api('/resumo').then(setResumo).catch((err) => setErro(err.message));
+    api('/resumo').then(setResumo).catch((err) => setErro(traduzirErro(lang, err.message)));
   }, []);
 
   if (erro) return <p className="erro">{erro}</p>;
