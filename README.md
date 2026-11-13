@@ -62,13 +62,33 @@ cd devops-abacaxi
 
 ## Rodando localmente
 
-Abra **dois terminais**, um para cada parte:
+O repositório raiz **não possui `package.json`**. O backend e o frontend são projetos independentes; execute os comandos dentro da pasta de cada projeto. No Windows, abra **dois terminais PowerShell** a partir da raiz do repositório:
 
-| Terminal 1 — API | Terminal 2 — Site |
-|---|---|
-| `cd abacaxi-backend` | `cd abacaxi-frontend` |
-| siga o [README do backend](abacaxi-backend/README.md#1-rodando-localmente-com-mysql) | siga o [README do frontend](abacaxi-frontend/README.md#1-rodando-localmente) |
-| API em http://localhost:3001 | Site em http://localhost:5173 |
+**Terminal 1 — banco MySQL e API**
+
+```powershell
+Set-Location .\abacaxi-backend
+npm install
+docker compose up -d
+npm run dev
+```
+
+**Terminal 2 — site React**
+
+```powershell
+Set-Location .\abacaxi-frontend
+npm install
+if (-not (Test-Path .env)) { Copy-Item .env.example .env }
+npm run dev
+```
+
+Abra o site em http://localhost:5173. A API fica em http://localhost:3001; a documentação interativa Swagger fica em http://localhost:3001/api-docs. O frontend local já aponta para a API nesse endereço por meio de `VITE_API_URL` em `abacaxi-frontend/.env`.
+
+Para parar os processos, use `Ctrl+C` no terminal correspondente. Para parar o banco, execute `docker compose down` dentro de `abacaxi-backend`.
+
+> Não execute `npm run dev` ou `npm start` na raiz: sem `package.json` nessa pasta, o npm retorna `ENOENT`. Use `npm run dev` dentro de `abacaxi-backend` e de `abacaxi-frontend`, cada um em seu próprio terminal.
+
+Para detalhes de configuração e solução de problemas, consulte o [README do backend](abacaxi-backend/README.md#1-rodando-localmente-com-mysql) e o [README do frontend](abacaxi-frontend/README.md#1-rodando-localmente).
 
 Login padrão: usuário **`admin`**, senha **`admin123`**.
 

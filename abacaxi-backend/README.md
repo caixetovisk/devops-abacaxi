@@ -37,6 +37,15 @@ src/
 
 ## Rotas
 
+### Documentação interativa (Swagger)
+
+Com a API em execução, acesse:
+
+- Interface Swagger UI: `http://localhost:3001/api-docs`
+- Especificação OpenAPI em JSON: `http://localhost:3001/api-docs.json`
+
+No Swagger UI, use **Authorize** e informe o token JWT obtido em `POST /auth/login` para testar as rotas protegidas.
+
 | Método | Rota | Login? | Descrição |
 |---|---|---|---|
 | GET | `/` | não | Testa se a API está no ar |
