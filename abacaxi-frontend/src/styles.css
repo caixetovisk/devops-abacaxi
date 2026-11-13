@@ -136,6 +136,9 @@ th, td { text-align: left; padding: 8px; border-bottom: 1px solid #eee; }
 .indicadores span { display: block; color: #666; font-size: 0.9rem; }
 .indicadores strong { font-size: 1.8rem; color: #2e7d32; }
 
+.currency-notice { display: block; color: #666; font-size: 0.8rem; }
+.formulario .currency-notice { width: 100%; margin: 0; }
+
 .erro { color: #c62828; }
 .dica { color: #666; font-size: 0.85rem; text-align: center; }
 

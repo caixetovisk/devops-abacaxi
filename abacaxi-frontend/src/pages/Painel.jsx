@@ -18,7 +18,11 @@ export default function Painel({ lang }) {
       <div className="card"><span>{t(lang, 'dashboard.totalHarvested')}</span><strong>{resumo.colhido}</strong></div>
       <div className="card"><span>{t(lang, 'dashboard.totalSold')}</span><strong>{resumo.vendido}</strong></div>
       <div className="card"><span>{t(lang, 'dashboard.inStock')}</span><strong>{resumo.estoque}</strong></div>
-      <div className="card"><span>{t(lang, 'dashboard.revenue')}</span><strong>{formatarDolares(resumo.faturamento)}</strong></div>
+      <div className="card">
+        <span>{t(lang, 'dashboard.revenue')}</span>
+        <strong>{formatarDolares(resumo.faturamento)}</strong>
+        <small className="currency-notice">{t(lang, 'currency.notice')}</small>
+      </div>
     </div>
   );
 }

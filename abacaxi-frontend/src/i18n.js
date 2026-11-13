@@ -33,6 +33,9 @@ export const translations = {
       revenue: 'Faturamento',
       loading: 'Carregando...',
     },
+    currency: {
+      notice: 'Todos os valores monetários são em dólares americanos (USD). O site não faz conversão para a moeda local.',
+    },
     form: {
       date: 'Data',
       quantity: 'Quantidade',
@@ -84,6 +87,9 @@ export const translations = {
       revenue: 'Revenue',
       loading: 'Loading...',
     },
+    currency: {
+      notice: 'All monetary values are in US dollars (USD). This site does not convert them to your local currency.',
+    },
     form: {
       date: 'Date',
       quantity: 'Quantity',
@@ -134,6 +140,9 @@ export const translations = {
       inStock: '库存',
       revenue: '收入',
       loading: '加载中...',
+    },
+    currency: {
+      notice: '所有金额均以美元（USD）显示。本网站不会将金额换算为您当地的货币。',
     },
     form: {
       date: '日期',

@@ -55,6 +55,7 @@ export default function Vendas({ lang }) {
           {t(lang, 'form.priceUnit')}
           <input type="number" min="0.01" step="0.01" value={form.preco_unitario} onChange={(e) => setForm({ ...form, preco_unitario: e.target.value })} required />
         </label>
+        <p className="currency-notice">{t(lang, 'currency.notice')}</p>
         <label>
           {t(lang, 'form.customer')}
           <input value={form.cliente} onChange={(e) => setForm({ ...form, cliente: e.target.value })} />
