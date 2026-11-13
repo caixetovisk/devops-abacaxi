@@ -2,9 +2,11 @@ require('dotenv').config();
 
 const express = require('express');
 const cors = require('cors');
+const swaggerUi = require('swagger-ui-express');
 const bcrypt = require('bcryptjs');
 const { sequelize, Usuario } = require('./models');
 const auth = require('./middleware/auth');
+const openapi = require('./openapi');
 
 const app = express();
 
@@ -15,6 +17,8 @@ app.use(express.json());
 app.get('/', (req, res) => {
   res.json({ status: 'ok', mensagem: 'API da Fazenda de Abacaxis 🍍' });
 });
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openapi));
 
 app.use('/auth', require('./routes/auth'));
 

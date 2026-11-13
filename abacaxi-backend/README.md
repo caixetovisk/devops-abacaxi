@@ -49,6 +49,12 @@ src/
 
 As rotas que exigem login precisam do cabeçalho `Authorization: Bearer <token>`.
 
+## Documentação da API (Swagger)
+
+Com o backend em execução, acesse `http://localhost:3001/api-docs` para consultar e testar os endpoints pelo Swagger UI. Em produção, substitua `localhost:3001` pelo endereço da API.
+
+Para testar as rotas protegidas, faça login em `POST /auth/login`, copie o `token` retornado e clique em **Authorize** no Swagger UI. Informe o token JWT; a interface adiciona o cabeçalho `Authorization: Bearer` nas requisições protegidas.
+
 ---
 
 ## 1. Rodando localmente (com MySQL)
