@@ -47,6 +47,15 @@ src/
 | DELETE | `/vendas/:id` | sim | Exclui uma venda |
 | GET | `/resumo` | sim | Totais para o painel |
 
+### Documentação interativa (Swagger)
+
+Com a API em execução, acesse:
+
+- Interface Swagger UI: `http://localhost:3001/api-docs`
+- Especificação OpenAPI em JSON: `http://localhost:3001/api-docs.json`
+
+No Swagger UI, execute `POST /auth/login`, copie o token retornado e use **Authorize** para testar as rotas protegidas. Em produção, substitua `localhost:3001` pela URL da API.
+
 As rotas que exigem login precisam do cabeçalho `Authorization: Bearer <token>`.
 
 ---

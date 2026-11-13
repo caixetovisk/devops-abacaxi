@@ -1,23 +1,28 @@
 import { useEffect, useState } from 'react';
-import { api, formatarReais } from '../api.js';
+import { api, formatarDolares } from '../api.js';
+import { t, traduzirErro } from '../i18n.js';
 
-export default function Painel() {
+export default function Painel({ lang }) {
   const [resumo, setResumo] = useState(null);
   const [erro, setErro] = useState('');
 
   useEffect(() => {
-    api('/resumo').then(setResumo).catch((err) => setErro(err.message));
+    api('/resumo').then(setResumo).catch((err) => setErro(traduzirErro(lang, err.message)));
   }, []);
 
   if (erro) return <p className="erro">{erro}</p>;
-  if (!resumo) return <p>Carregando...</p>;
+  if (!resumo) return <p>{t(lang, 'dashboard.loading')}</p>;
 
   return (
     <div className="indicadores">
-      <div className="card"><span>Total colhido</span><strong>{resumo.colhido}</strong></div>
-      <div className="card"><span>Total vendido</span><strong>{resumo.vendido}</strong></div>
-      <div className="card"><span>Em estoque</span><strong>{resumo.estoque}</strong></div>
-      <div className="card"><span>Faturamento</span><strong>{formatarReais(resumo.faturamento)}</strong></div>
+      <div className="card"><span>{t(lang, 'dashboard.totalHarvested')}</span><strong>{resumo.colhido}</strong></div>
+      <div className="card"><span>{t(lang, 'dashboard.totalSold')}</span><strong>{resumo.vendido}</strong></div>
+      <div className="card"><span>{t(lang, 'dashboard.inStock')}</span><strong>{resumo.estoque}</strong></div>
+      <div className="card">
+        <span>{t(lang, 'dashboard.revenue')}</span>
+        <strong>{formatarDolares(resumo.faturamento)}</strong>
+        <small className="currency-notice">{t(lang, 'currency.notice')}</small>
+      </div>
     </div>
   );
 }

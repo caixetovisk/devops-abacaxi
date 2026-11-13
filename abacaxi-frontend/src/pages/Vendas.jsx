@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
-import { api, formatarData, formatarReais, hoje } from '../api.js';
+import { api, formatarData, formatarDolares, hoje } from '../api.js';
+import { t, traduzirErro } from '../i18n.js';
 
-export default function Vendas() {
+export default function Vendas({ lang }) {
   const [vendas, setVendas] = useState([]);
   const [form, setForm] = useState({ data: hoje(), quantidade: '', preco_unitario: '', cliente: '' });
   const [erro, setErro] = useState('');
 
-  const carregar = () => api('/vendas').then(setVendas).catch((err) => setErro(err.message));
+  const carregar = () => api('/vendas').then(setVendas).catch((err) => setErro(traduzirErro(lang, err.message)));
   useEffect(() => { carregar(); }, []);
 
   async function salvar(e) {
@@ -24,7 +25,7 @@ export default function Vendas() {
       setForm({ ...form, quantidade: '', preco_unitario: '', cliente: '' });
       carregar();
     } catch (err) {
-      setErro(err.message);
+      setErro(traduzirErro(lang, err.message));
     }
   }
 
@@ -34,38 +35,46 @@ export default function Vendas() {
       await api(`/vendas/${id}`, { method: 'DELETE' });
       carregar();
     } catch (err) {
-      setErro(err.message);
+      setErro(traduzirErro(lang, err.message));
     }
   }
 
   return (
     <>
       <form className="card formulario" onSubmit={salvar}>
-        <h2>Registrar venda</h2>
+        <h2>{t(lang, 'form.registerSale')}</h2>
         <label>
-          Data
+          {t(lang, 'form.date')}
           <input type="date" value={form.data} onChange={(e) => setForm({ ...form, data: e.target.value })} required />
         </label>
         <label>
-          Quantidade
+          {t(lang, 'form.quantity')}
           <input type="number" min="1" value={form.quantidade} onChange={(e) => setForm({ ...form, quantidade: e.target.value })} required />
         </label>
         <label>
-          Preço unitário (R$)
+          {t(lang, 'form.priceUnit')}
           <input type="number" min="0.01" step="0.01" value={form.preco_unitario} onChange={(e) => setForm({ ...form, preco_unitario: e.target.value })} required />
         </label>
+        <p className="currency-notice">{t(lang, 'currency.notice')}</p>
         <label>
-          Cliente
+          {t(lang, 'form.customer')}
           <input value={form.cliente} onChange={(e) => setForm({ ...form, cliente: e.target.value })} />
         </label>
-        <button type="submit">Salvar</button>
+        <button type="submit">{t(lang, 'form.save')}</button>
       </form>
       {erro && <p className="erro">{erro}</p>}
 
       <div className="card tabela">
         <table>
           <thead>
-            <tr><th>Data</th><th>Cliente</th><th>Qtd.</th><th>Preço un.</th><th>Total</th><th></th></tr>
+            <tr>
+              <th>{t(lang, 'form.date')}</th>
+              <th>{t(lang, 'form.customer')}</th>
+              <th>{t(lang, 'table.qtyShort')}</th>
+              <th>{t(lang, 'table.priceUnitShort')}</th>
+              <th>{t(lang, 'table.total')}</th>
+              <th></th>
+            </tr>
           </thead>
           <tbody>
             {vendas.map((v) => (
@@ -73,12 +82,12 @@ export default function Vendas() {
                 <td>{formatarData(v.data)}</td>
                 <td>{v.cliente}</td>
                 <td>{v.quantidade}</td>
-                <td>{formatarReais(v.preco_unitario)}</td>
-                <td>{formatarReais(v.quantidade * Number(v.preco_unitario))}</td>
-                <td><button className="excluir" onClick={() => excluir(v.id)}>Excluir</button></td>
+                <td>{formatarDolares(v.preco_unitario)}</td>
+                <td>{formatarDolares(v.quantidade * Number(v.preco_unitario))}</td>
+                <td><button className="excluir" onClick={() => excluir(v.id)}>{t(lang, 'form.delete')}</button></td>
               </tr>
             ))}
-            {vendas.length === 0 && <tr><td colSpan="6">Nenhuma venda registrada.</td></tr>}
+            {vendas.length === 0 && <tr><td colSpan="6">{t(lang, 'table.noSales')}</td></tr>}
           </tbody>
         </table>
       </div>
