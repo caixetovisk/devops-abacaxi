@@ -12,7 +12,7 @@ applyTo:
 
 - Mantenha a indentação de dois espaços, use ponto e vírgula e prefira aspas simples em JavaScript. Em JSX, use aspas duplas nos atributos.
 - Preserve a organização e o estilo já adotados no arquivo; evite reformatar trechos não relacionados à alteração.
-- Escreva textos de interface e mensagens destinadas às pessoas usuárias em português.
+- O português é o idioma padrão da interface. Adicione e mantenha textos visíveis no catálogo de traduções para todos os idiomas suportados.
 
 ## Backend
 

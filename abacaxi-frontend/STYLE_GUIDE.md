@@ -5,7 +5,7 @@ Este documento registra a identidade visual atualmente usada pela Fazenda de Aba
 ## Identidade e tipografia
 
 - **Fonte:** `system-ui, sans-serif`, definida no `body`. O projeto não carrega fontes externas; prefira a fonte do sistema.
-- **Tom:** interface simples e acolhedora, com referências visuais à fazenda e ao abacaxi. Os textos da interface são em português.
+- **Tom:** interface simples e acolhedora, com referências visuais à fazenda e ao abacaxi. Português é o idioma padrão; textos localizados também aparecem em inglês e chinês simplificado.
 - **Títulos:** o cabeçalho principal usa `1.3rem`; o título do formulário usa `1.1rem`; o título da tela de login usa `1.4rem`.
 - **Números de destaque:** indicadores do painel usam `1.8rem` e verde.
 - **Texto padrão:** cor `#333`. Textos auxiliares usam `#666`.
@@ -32,6 +32,7 @@ Preserve o papel visual das cores nos componentes existentes. Não use a cor de 
 
 - O abacaxi é representado pelo emoji `🍍`, usado no favicon e nos títulos da aplicação.
 - No cabeçalho, o emoji recebe a classe `.abacaxi-large`; mantenha a identidade do símbolo e evite substituí-lo por uma imagem ou pacote de ícones sem necessidade.
+- O seletor de idioma usa as bandeiras emoji `🇧🇷`, `🇺🇸` e `🇨🇳`, disponíveis no topo da página de login e do cabeçalho autenticado.
 - O projeto não tem biblioteca de ícones. Prefira os símbolos existentes e rótulos textuais; não adicione dependências de ícones para ações que possam ser identificadas por texto.
 
 ## Botões e controles

@@ -9,7 +9,7 @@
 
 ## Convenções de alteração
 
-- Siga os padrões e a linguagem já usados no arquivo e na área que estiver modificando. A interface e a documentação do projeto são em português.
+- Siga os padrões e a linguagem já usados no arquivo e na área que estiver modificando. O português é o idioma padrão da interface; a documentação do projeto é em português.
 - Configure URLs, credenciais e demais valores por ambiente: use `.env.example` como referência, não inclua segredos em código ou commits e não dependa de valores locais em produção.
 - Preserve os contratos das rotas e o fluxo entre frontend e API; ao alterá-los, atualize os consumidores e a documentação pertinente.
 - Consulte os READMEs da raiz, backend ou frontend para instruções completas de desenvolvimento e deploy; evite duplicar neles o conteúdo detalhado.
