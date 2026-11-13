@@ -65,7 +65,8 @@ Aplique estas regras para qualquer alteração em componentes, páginas, estilos
 - Mantenha uma linguagem amigável e direta em português.
 - Todo texto novo ou alterado da interface deve ter traduções em português, inglês e chinês simplificado.
 - O português é o idioma padrão; persista a escolha do usuário no `localStorage`, inclusive após sair da conta.
-- Localize a exibição de datas e valores monetários sem converter os preços existentes de BRL para outra moeda.
+- Exiba todo valor monetário em dólares americanos (USD) em qualquer idioma; a localização pode alterar separadores, mas nunca a moeda.
+- Não converta valores existentes: mantenha o número armazenado e apresente-o como USD.
 
 ## Regras de implementação
 - Mantenha todo o CSS em `abacaxi-frontend/src/styles.css` ou em estilos locais quando o padrão exigir.

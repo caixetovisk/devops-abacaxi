@@ -37,7 +37,7 @@ const TRADUCOES = {
       date: 'Data',
       customer: 'Cliente',
       quantity: 'Qtd.',
-      unitPrice: 'Preço unitário (R$)',
+      unitPrice: 'Preço unitário (USD)',
       total: 'Total',
       save: 'Salvar',
       delete: 'Excluir',
@@ -79,7 +79,7 @@ const TRADUCOES = {
       date: 'Date',
       customer: 'Customer',
       quantity: 'Qty.',
-      unitPrice: 'Unit price (BRL)',
+      unitPrice: 'Unit price (USD)',
       total: 'Total',
       save: 'Save',
       delete: 'Delete',
@@ -121,7 +121,7 @@ const TRADUCOES = {
       date: '日期',
       customer: '客户',
       quantity: '数量',
-      unitPrice: '单价（巴西雷亚尔）',
+      unitPrice: '单价（美元 USD）',
       total: '总计',
       save: '保存',
       delete: '删除',
@@ -214,6 +214,6 @@ export function formatarData(data, idioma) {
 export function formatarMoeda(valor, idioma) {
   return new Intl.NumberFormat(
     { pt: 'pt-BR', en: 'en-US', zh: 'zh-CN' }[idioma],
-    { style: 'currency', currency: 'BRL' }
+    { style: 'currency', currency: 'USD' }
   ).format(Number(valor));
 }

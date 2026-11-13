@@ -56,7 +56,9 @@ A identidade atual é baseada em verde, amarelo, azul escuro e neutros suaves.
 - O português é o idioma padrão; a interface também oferece inglês e chinês simplificado.
 - A preferência de idioma fica salva no `localStorage` e deve ser mantida ao sair da conta.
 - Textos novos da interface devem ser adicionados às traduções de todos os idiomas.
-- Valores monetários continuam em reais (BRL); o formato localiza números e datas, mas não realiza conversão cambial.
+- Todos os valores monetários devem usar dólares americanos (USD), independentemente do idioma selecionado.
+- O idioma pode localizar a separação de milhares e decimais, mas não deve mudar a moeda.
+- Não realizar conversão cambial: valores já cadastrados mantêm o mesmo número e passam a ser exibidos como USD.
 
 ## 5) Botões
 A interface usa botões discretos, com bordas arredondadas e bom contraste.

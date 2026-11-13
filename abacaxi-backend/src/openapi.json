@@ -3,7 +3,7 @@
   "info": {
     "title": "API da Fazenda de Abacaxis",
     "version": "1.0.0",
-    "description": "API para autenticação, registro de colheitas e vendas, controle de estoque e consulta do resumo."
+    "description": "API para autenticação, registro de colheitas e vendas, controle de estoque e consulta do resumo. Os valores monetários são expressos em dólares americanos (USD), sem conversão cambial."
   },
   "servers": [
     {
@@ -393,6 +393,7 @@
             "type": "number",
             "minimum": 0,
             "exclusiveMinimum": true,
+            "description": "Preço unitário em dólares americanos (USD).",
             "example": 12.5
           },
           "cliente": { "type": "string", "nullable": true, "example": "Mercado Central" }
@@ -405,7 +406,11 @@
           "id": { "type": "integer", "example": 1 },
           "data": { "type": "string", "format": "date", "example": "2026-11-06" },
           "quantidade": { "type": "integer", "example": 10 },
-          "preco_unitario": { "type": "string", "example": "12.50" },
+          "preco_unitario": {
+            "type": "string",
+            "description": "Preço unitário em dólares americanos (USD).",
+            "example": "12.50"
+          },
           "cliente": { "type": "string", "nullable": true, "example": "Mercado Central" },
           "createdAt": { "type": "string", "format": "date-time" },
           "updatedAt": { "type": "string", "format": "date-time" }
@@ -418,7 +423,11 @@
           "colhido": { "type": "integer", "example": 100 },
           "vendido": { "type": "integer", "example": 40 },
           "estoque": { "type": "integer", "example": 60 },
-          "faturamento": { "type": "number", "example": 500 }
+          "faturamento": {
+            "type": "number",
+            "description": "Faturamento em dólares americanos (USD).",
+            "example": 500
+          }
         }
       }
     }

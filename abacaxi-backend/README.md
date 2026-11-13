@@ -51,6 +51,8 @@ A documentação interativa Swagger está disponível em **`/docs`** quando a AP
 
 As rotas que exigem login precisam do cabeçalho `Authorization: Bearer <token>`.
 
+Os campos monetários `preco_unitario` e `faturamento` são interpretados como dólares americanos (USD). A API não realiza conversão cambial; valores existentes são mantidos sem alteração numérica.
+
 ---
 
 ## 1. Rodando localmente (com MySQL)
