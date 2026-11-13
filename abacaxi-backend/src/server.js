@@ -54,6 +54,6 @@ async function iniciar() {
 }
 
 iniciar().catch((err) => {
-  console.error('Falha ao iniciar a API:', err.message);
+  console.error('Falha ao iniciar a API:', err);
   process.exit(1);
 });
