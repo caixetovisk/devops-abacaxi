@@ -62,15 +62,31 @@ cd devops-abacaxi
 
 ## Rodando localmente
 
-Abra **dois terminais**, um para cada parte:
+Na raiz do repositório, instale as dependências em cada projeto uma vez:
+
+```bash
+npm install --prefix abacaxi-backend
+npm install --prefix abacaxi-frontend
+```
+
+Inicie o MySQL local antes da API. Com Docker Desktop aberto, execute:
+
+```bash
+docker compose -f abacaxi-backend/docker-compose.yml up -d
+```
+
+Depois, abra **dois terminais na raiz**:
 
 | Terminal 1 — API | Terminal 2 — Site |
 |---|---|
-| `cd abacaxi-backend` | `cd abacaxi-frontend` |
-| siga o [README do backend](abacaxi-backend/README.md#1-rodando-localmente-com-mysql) | siga o [README do frontend](abacaxi-frontend/README.md#1-rodando-localmente) |
+| `npm run dev:api` | `npm run dev` |
 | API em http://localhost:3001 | Site em http://localhost:5173 |
 
 Login padrão: usuário **`admin`**, senha **`admin123`**.
+
+Para gerar o build do site a partir da raiz, use `npm run build`. A API requer MySQL ativo e as variáveis de ambiente configuradas em `abacaxi-backend/.env`; veja o [README do backend](abacaxi-backend/README.md#1-rodando-localmente-com-mysql) se precisar configurar o banco.
+
+Se o site mostrar que não consegue conectar à API, confirme que o MySQL está ativo e que `npm run dev:api` está rodando em outro terminal. No ambiente local, `VITE_API_URL` deve ser `http://localhost:3001`. Se `docker compose` informar que não consegue conectar ao Docker Engine, abra o Docker Desktop e espere o serviço iniciar antes de subir o MySQL.
 
 ## Deploy no Render: ordem dos passos
 
