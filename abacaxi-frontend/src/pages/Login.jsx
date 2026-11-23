@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { api } from '../api.js';
+import { SeletorIdioma, useIdioma } from '../i18n.jsx';
 
 export default function Login({ onLogin }) {
+  const { t, traduzirErro } = useIdioma();
   const [usuario, setUsuario] = useState('');
   const [senha, setSenha] = useState('');
   const [erro, setErro] = useState('');
@@ -17,7 +19,7 @@ export default function Login({ onLogin }) {
       localStorage.setItem('usuario', dados.usuario);
       onLogin(dados.usuario);
     } catch (err) {
-      setErro(err.message === 'Failed to fetch' ? 'Não foi possível conectar à API' : err.message);
+      setErro(err.message);
     } finally {
       setCarregando(false);
     }
@@ -25,22 +27,23 @@ export default function Login({ onLogin }) {
 
   return (
     <div className="login">
+      <SeletorIdioma className="seletor-idioma-login" />
       <form className="card" onSubmit={entrar}>
-        <h1>🍍 Fazenda de Abacaxis</h1>
+        <h1>🍍 {t('app.name')}</h1>
         <label>
-          Usuário
+          {t('login.username')}
           <input value={usuario} onChange={(e) => setUsuario(e.target.value)} required autoFocus />
         </label>
         <label>
-          Senha
+          {t('login.password')}
           <input type="password" value={senha} onChange={(e) => setSenha(e.target.value)} required />
         </label>
-        {erro && <p className="erro">{erro}</p>}
+        {erro && <p className="erro">{traduzirErro(erro)}</p>}
         <button type="submit" disabled={carregando}>
-          {carregando ? 'Entrando...' : 'Entrar'}
+          {carregando ? t('login.signingIn') : t('login.signIn')}
         </button>
         {carregando && (
-          <p className="dica">No plano gratuito do Render a API pode levar até 1 minuto para "acordar".</p>
+          <p className="dica">{t('login.wakeMessage')}</p>
         )}
       </form>
     </div>

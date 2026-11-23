@@ -20,12 +20,17 @@ Pela variável de ambiente **`VITE_API_URL`**. Veja [src/api.js](src/api.js).
 
 > ⚠️ **Importante:** no Vite, as variáveis `VITE_*` são gravadas no código **no momento do build** (`npm run build`). Se você mudar o valor dela, precisa fazer **um novo build/deploy** para a mudança valer.
 
+## Idiomas
+
+A interface está disponível em português (padrão), inglês e chinês simplificado. Use as bandeiras no topo da tela para trocar o idioma; a preferência fica salva no armazenamento local do navegador e continua selecionada após sair ou atualizar a página.
+
 ## Estrutura
 
 ```
 src/
 ├── main.jsx          # ponto de entrada
 ├── App.jsx           # menu e troca de páginas
+├── i18n.jsx          # traduções, seletor e preferência de idioma
 ├── api.js            # função que chama a API (usa VITE_API_URL)
 ├── styles.css
 └── pages/

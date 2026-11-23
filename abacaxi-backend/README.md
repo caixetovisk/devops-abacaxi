@@ -47,6 +47,12 @@ src/
 | DELETE | `/vendas/:id` | sim | Exclui uma venda |
 | GET | `/resumo` | sim | Totais para o painel |
 
+## Documentação Swagger
+
+Com a API em execução, acesse [http://localhost:3001/api-docs](http://localhost:3001/api-docs) para explorar e testar as rotas no Swagger UI. A especificação OpenAPI em JSON está disponível em [http://localhost:3001/api-docs.json](http://localhost:3001/api-docs.json).
+
+Para testar rotas protegidas, faça login em `POST /auth/login`, copie o token retornado e selecione **Authorize** no Swagger UI. Informe o token JWT; o Swagger enviará o cabeçalho de autorização automaticamente.
+
 As rotas que exigem login precisam do cabeçalho `Authorization: Bearer <token>`.
 
 ---
